@@ -35,16 +35,16 @@ Helpdesk teams burn time searching KBs, formatting replies, and performing repet
 
 ```mermaid
 flowchart LR
-  UI[Web UI / Swagger] --> API(FastAPI /api)
+  UI[Web UI / Swagger] --> API[FastAPI /api]
   subgraph Backend
-    API --> RET[(Retriever pgvector/FAISS)]
-    API --> LLM{Model Provider\n(OpenRouter or Local)}
-    API --> ACT[Actions Mock\nRBAC + HIL]
+    API --> RET[Retriever pgvector/FAISS]
+    API --> LLM[Model Provider<br/>OpenRouter or Local]
+    API --> ACT[Actions Mock<br/>RBAC + HIL]
     API --> LOG[Structured Logs]
-    W(Worker: Celery) -->|Ingest/Eval| DB[(Postgres + pgvector)]
+    W[Worker: Celery] -->|Ingest/Eval| DB[Postgres + pgvector]
     RET --> DB
   end
-  FS[[Local KB Folder]] -->|Ingest| W
+  FS[Local KB Folder] -->|Ingest| W
 ```
 
 ---
